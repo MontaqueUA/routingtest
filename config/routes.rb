@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  root to: 'home#index'
   resources :user_organizations
   devise_for :users
-  root 'home#index'
   get 'home/assigning', to: 'home#assigning'
   resources :drivers
   resources :routes
