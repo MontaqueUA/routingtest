@@ -1,0 +1,48 @@
+
+<br>
+<h3> Conjunto de Rutas 19/01/2202 </h3>
+<br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#Ruta</th>
+      <th scope="col">Hora</th>
+      <th scope="col">Tiempo</th>
+      <th scope="col">Paradas</th>
+      <th scope="col">Acción</th>
+      <th scope="col">Vehiculo</th>
+      <th scope="col">Conductor</th>
+      <th scope="col"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @routes.each do |route| %>
+      <tr>
+        <th scope="row"><%= route.id %></th>
+        <td><%= route.starts_at.strftime("%H : %M") %> - <%= route.ends_at.strftime("%H : %M") %></td>
+        <td><%= route.travel_time %></td>
+        <td><%= route.total_stops %></td>
+        <td><%= route.action %></td>
+        <%form_for :route, @route, :url => { :action => "update", :html => "nifty_form" } do |f| %>
+        <td>
+          <select class="form-select" aria-label="Default select example">
+            <% @vehicles.each do |vehicle|%>
+            <option value= <%=vehicle.id%>> <%=vehicle.plate%> </option>
+            <% end %>
+          </select>
+        </td>
+        <td>
+        <select class="form-select" aria-label="Default select example">
+            <% @drivers.each do |driver|%>
+            <option value= <%=driver.id%>> <%=driver.name + " " + driver.last_name%> </option>
+            <% end %>
+          </select>
+        </td>
+        <td>
+          <button type="button" class="btn btn-primary"> Asignar </button>
+        </td>
+      <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

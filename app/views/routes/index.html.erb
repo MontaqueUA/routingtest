@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Routes</h1>
+
+<div id="routes">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Starts at</th>
+        <th>Ends at</th>
+        <th>Travel time</th>
+        <th>Total Stops</th>
+        <th></th>
+      </tr>
+    <thead>
+  </table>
+  <% @routes.each do |route| %>
+    <%= render route %>
+    <p>
+      <%= link_to "Show this route", route %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New route", new_route_path %>
