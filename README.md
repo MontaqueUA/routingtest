@@ -1,25 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Correct en rails 7.0
 
-Things you may want to cover:
+bundle install
 
-* Ruby version
+rails db:migrate
+rails db:seed
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Se puede usar la cuenta "nacho@gmail.com" contraseña "nachos"
+Ingresar a opcion "Asignar" en nav bar.
 
