@@ -18,30 +18,34 @@
   <tbody>
     <% @routes.each do |route| %>
       <tr>
+        <%= form_with(model: route) do |form| %>
         <th scope="row"><%= route.id %></th>
         <td><%= route.starts_at.strftime("%H : %M") %> - <%= route.ends_at.strftime("%H : %M") %></td>
         <td><%= route.travel_time %></td>
         <td><%= route.total_stops %></td>
         <td><%= route.action %></td>
-        <%form_for :route, @route, :url => { :action => "update", :html => "nifty_form" } do |f| %>
         <td>
-          <select class="form-select" aria-label="Default select example">
-            <% @vehicles.each do |vehicle|%>
-            <option value= <%=vehicle.id%>> <%=vehicle.plate%> </option>
-            <% end %>
-          </select>
+          <% if not route.vehicle.nil? %>
+            <%= route.vehicle.plate %>
+          <% else %>
+            <%= select_tag :vehicle, options_from_collection_for_select(@vehicles,'id','plate'), prompt: "- Elegir Vehiculo -" %>
+          <% end %>
         </td>
         <td>
-        <select class="form-select" aria-label="Default select example">
-            <% @drivers.each do |driver|%>
-            <option value= <%=driver.id%>> <%=driver.name + " " + driver.last_name%> </option>
-            <% end %>
-          </select>
+          <% if not route.vehicle.nil? %>
+            <%= route.driver.name + " " + route.driver.last_name %>
+          <% else %>
+            <%= select_tag :driver, options_from_collection_for_select(@drivers,'id','name'), prompt: "- Elegir Conductor -" %>
+          <% end %>
         </td>
         <td>
-          <button type="button" class="btn btn-primary"> Asignar </button>
+          <% if (route.vehicle.nil? || route.driver.nil?) %>
+            <%= form.submit "Submit",  type:"submit", class:"btn btn-primary" %>
+          <% else %>
+            <%= form.submit "Submit", type:"submit", class:"btn btn-secondary", :disabled => true %>
+          <% end %>
         </td>
-      <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

@@ -3,4 +3,5 @@ class Organization < ApplicationRecord
   has_many :vehicles, dependent: :delete_all
   has_many :routes, dependent: :delete_all
   has_many :users, dependent: :delete_all
+  has_many :user_organizations, dependent: :delete_all
 end
